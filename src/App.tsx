@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { type IpApiResponse, QueryApi } from "@/services/ipApi";
+import { type IpApiResponse, Lookup } from "@/services/ipApi";
 
 interface dumpObjectProps {
   object: any;
@@ -32,7 +32,7 @@ function App() {
 
   const handleSubmit = async () => {
     setLoading(true);
-    const lookup = await QueryApi(ip);
+    const lookup = await Lookup(ip);
     console.log(lookup);
     setLookup(lookup);
     setIp("");

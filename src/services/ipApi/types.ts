@@ -7,7 +7,6 @@ export type IpLookupData = {
   region: string;
   regionName: string;
   city: string;
-  district: string;
   zip: string;
   lat: number;
   lon: number;
