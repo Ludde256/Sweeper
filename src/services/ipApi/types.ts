@@ -1,3 +1,4 @@
+// The data we do care about
 export type IpLookupData = {
   continent: string;
   continentCode: string;
@@ -23,13 +24,16 @@ export type IpLookupData = {
   query: string;
 }
 
+// Successful response always has all the data
 export type IpLookupSuccess = {
   status: "success";
 } & IpLookupData;
 
+// Failed response only has a subset of the data
 export type IpLookupFail = {
   status: "fail";
   message: "private range" | "reserved range" | "invalid query";
 } & Pick<IpLookupData, "query">;
 
+// Union type of both possible responses
 export type IpApiResponse = IpLookupSuccess | IpLookupFail;

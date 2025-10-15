@@ -3,15 +3,25 @@ import type { IpLookupFail, IpLookupSuccess, IpApiResponse } from "./types";
 const IP_API_URL = "http://ip-api.com/json/";
 const IP_API_FIELDS = 58458111; // All fields except currency
 
+// Construct the full URL with the given IP and fields
 function constructURL(ip: string): string {
   return `${IP_API_URL}${ip}?fields=${IP_API_FIELDS}`;
 }
 
-export async function Lookup(ip: string): Promise<IpApiResponse> {
+// Fetch data from the IP API and return the parsed response
+export async function QueryApi(ip: string): Promise<IpApiResponse> {
   const url = constructURL(ip);
 
   const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`Error fetching IP data: ${response.statusText}`);
+  }
+
   const data = await response.json() as { status: string }
+  // Ensures that the response body always has a 'status' field or else things a really wrong
+  if (!("status" in data)) {
+    throw new Error("Invalid response from IP API");
+  }
 
   if (data.status === "fail") {
     return data as IpLookupFail;
