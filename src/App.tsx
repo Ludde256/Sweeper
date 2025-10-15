@@ -1,12 +1,6 @@
 import { useState } from "react";
 
-import {
-  type IpLookupSuccess,
-  type IpLookupFail,
-  Lookup,
-} from "@/services/ipApi";
-
-type Lookup = IpLookupSuccess | IpLookupFail | undefined;
+import { type IpApiResponse, Lookup } from "@/services/ipApi";
 
 interface dumpObjectProps {
   object: any;
@@ -34,7 +28,7 @@ function DumpObject({ object }: dumpObjectProps) {
 function App() {
   const [ip, setIp] = useState("");
   const [loading, setLoading] = useState(false);
-  const [lookup, setLookup] = useState<Lookup>(undefined);
+  const [lookup, setLookup] = useState<IpApiResponse | undefined>(undefined);
 
   const handleSubmit = async () => {
     setLoading(true);
