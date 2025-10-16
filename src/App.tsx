@@ -2,6 +2,8 @@ import { useState } from "react";
 
 import { type IpApiResponse, Lookup } from "@/services/ipApi";
 
+import { IPInfo } from "./components/ipInfo";
+
 interface dumpObjectProps {
   object: any;
 }
@@ -53,6 +55,7 @@ function App() {
           Submit
         </button>
         <DumpObject object={lookup} />
+        <IPInfo />
       </div>
     </div>
   );
