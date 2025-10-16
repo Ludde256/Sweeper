@@ -4,5 +4,5 @@ import type { IpApiResponse, IpLookupSuccess } from "./types";
 // if this function returns true, then the data is of type IpLookupSuccess
 // Useful in conditional checks to narrow down types.
 export function IsLookupSuccess(data: IpApiResponse): data is IpLookupSuccess {
-  return data.status === "success";
+	return data.status === "success";
 }
