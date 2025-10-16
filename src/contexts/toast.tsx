@@ -1,5 +1,5 @@
 import { Toast as ToastComponent } from "@/components/toast";
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from "react";
 
 const MAX_TOASTS = 10;
 const TOAST_TIMEOUT = 5000;
@@ -25,26 +25,32 @@ interface ToastContextProviderProps {
 export function ToastContextProvider({ children }: ToastContextProviderProps) {
 	const [toasts, setToasts] = useState<Toast[]>([]);
 
-	const showToast = (type: ToastType, message: string) => {
-		const id = crypto.randomUUID() as string;
-		const toast: Toast = { id, type, message };
-
-		setToasts((prev) => [...prev.slice(0, MAX_TOASTS - 1), toast]);
-
-		setTimeout(() => dismissToast(id), TOAST_TIMEOUT);
-	};
-
-	const dismissToast = (id: string) => {
+	// I've been told to optimize context especially because the compiler does not optimize much in this case.
+	const dismissToast = useCallback((id: string) => {
 		setToasts((prev) => prev.filter((toast) => toast.id !== id));
-	};
+	}, []);
+
+	const showToast = useCallback(
+		(type: ToastType, message: string) => {
+			const id = crypto.randomUUID() as string;
+			const toast: Toast = { id, type, message };
+
+			setToasts((prev) => [...prev.slice(0, MAX_TOASTS - 1), toast]);
+
+			setTimeout(() => dismissToast(id), TOAST_TIMEOUT);
+		},
+		[dismissToast]
+	);
+
+	const value = useMemo(() => ({ showToast }), [showToast]);
 
 	return (
-		<toastContext.Provider value={{ showToast }}>
+		<toastContext.Provider value={value}>
 			{children}
 			<div className="toast">
-				{toasts.map((toast, index) => (
+				{toasts.map((toast) => (
 					<ToastComponent
-						key={index}
+						key={toast.id}
 						type={toast.type}
 						message={toast.message}
 						onDismiss={() => dismissToast(toast.id)}
