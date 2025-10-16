@@ -41,24 +41,6 @@ function App() {
 		setLoading(false);
 	};
 
-  return (
-    <div className="flex items-center justify-center h-screen w-screen">
-      <div className="flex flex-col gap-2">
-        <input
-          type="text"
-          className="input"
-          onChange={(e) => setIp(e.target.value)}
-          value={ip}
-        />
-        {loading && <p className="font-bold">Loading...</p>}
-        <button onClick={handleSubmit} className="btn">
-          Submit
-        </button>
-        <DumpObject object={lookup} />
-        <IPInfo />
-      </div>
-    </div>
-  );
 	return (
 		<div className="flex items-center justify-center h-screen w-screen">
 			<div className="flex flex-col gap-2">
@@ -68,6 +50,7 @@ function App() {
 					Submit
 				</button>
 				<DumpObject object={lookup} />
+				<IPInfo />
 			</div>
 		</div>
 	);
