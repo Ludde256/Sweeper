@@ -31,10 +31,12 @@ function DumpObject({ object }: dumpObjectProps) {
 function TestToast() {
 	const { showToast } = useToastContext();
 
-	const type: ToastType = ["success", "warning", "error"][Math.floor(Math.random() * 3)] as ToastType;
+	const getRandomType = () => {
+		return ["success", "warning", "error"][Math.floor(Math.random() * 3)] as ToastType;
+	};
 
 	return (
-		<button className="btn" onClick={() => showToast(type, "Hello, World!")}>
+		<button className="btn" onClick={() => showToast(getRandomType(), "Hello, World!")}>
 			Toast Me!
 		</button>
 	);
