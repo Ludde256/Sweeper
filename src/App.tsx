@@ -2,7 +2,8 @@ import { useState } from "react";
 
 import { type IpApiResponse, Lookup } from "@/services/ipApi";
 
-import { IPInfo } from "./components/ipInfo";
+// import { IPInfo } from "./components/ipInfo";
+import { ToastContextProvider, useToastContext, type ToastType } from "./contexts/toast";
 
 interface dumpObjectProps {
 	object: any;
@@ -27,6 +28,18 @@ function DumpObject({ object }: dumpObjectProps) {
 	);
 }
 
+function TestToast() {
+	const { showToast } = useToastContext();
+
+	const type: ToastType = ["success", "warning", "error"][Math.floor(Math.random() * 3)] as ToastType;
+
+	return (
+		<button className="btn" onClick={() => showToast(type, "Hello, World!")}>
+			Toast Me!
+		</button>
+	);
+}
+
 function App() {
 	const [ip, setIp] = useState("");
 	const [loading, setLoading] = useState(false);
@@ -42,17 +55,20 @@ function App() {
 	};
 
 	return (
-		<div className="flex items-center justify-center h-screen w-screen">
-			<div className="flex flex-col gap-2">
-				<input type="text" className="input" onChange={(e) => setIp(e.target.value)} value={ip} />
-				{loading && <p className="font-bold">Loading...</p>}
-				<button onClick={handleSubmit} className="btn">
-					Submit
-				</button>
-				<DumpObject object={lookup} />
-				<IPInfo />
+		<ToastContextProvider>
+			<div className="flex items-center justify-center h-screen w-screen">
+				<div className="flex flex-col gap-2">
+					<input type="text" className="input" onChange={(e) => setIp(e.target.value)} value={ip} />
+					{loading && <p className="font-bold">Loading...</p>}
+					<button onClick={handleSubmit} className="btn">
+						Submit
+					</button>
+					<DumpObject object={lookup} />
+					<TestToast />
+					{/* <IPInfo /> */}
+				</div>
 			</div>
-		</div>
+		</ToastContextProvider>
 	);
 }
 
