@@ -1,21 +1,64 @@
-import { createContext, type ReactNode } from "react";
+import { Toast as ToastComponent } from "@/components/toast";
+import { createContext, useContext, useState, type ReactNode } from "react";
 
-export type ToastTypes = "success" | "warning" | "error";
+const MAX_TOASTS = 10;
+const TOAST_TIMEOUT = 5000;
 
-export type ToastFunction = (type: ToastTypes, message: string) => void;
+export type ToastType = "success" | "warning" | "error";
 
-const toastContext = createContext<ToastFunction | undefined>(undefined);
+type Toast = {
+	id: string;
+	type: ToastType;
+	message: string;
+};
+
+export interface ToastContextValue {
+	showToast: (type: ToastType, message: string) => void;
+}
+
+const toastContext = createContext<ToastContextValue | undefined>(undefined);
 
 interface ToastContextProviderProps {
 	children: ReactNode;
 }
 
 export function ToastContextProvider({ children }: ToastContextProviderProps) {
-	const showToast = (type: ToastTypes, message: string) => {
-		console.log("Showing toast");
-		console.log(type);
-		console.log(message);
+	const [toasts, setToasts] = useState<Toast[]>([]);
+
+	const showToast = (type: ToastType, message: string) => {
+		const id = crypto.randomUUID() as string;
+		const toast: Toast = { id, type, message };
+
+		setToasts((prev) => [...prev.slice(0, MAX_TOASTS - 1), toast]);
+
+		setTimeout(() => dismissToast(id), TOAST_TIMEOUT);
 	};
 
-	return <toastContext.Provider value={showToast}>{children}</toastContext.Provider>;
+	const dismissToast = (id: string) => {
+		setToasts((prev) => prev.filter((toast) => toast.id !== id));
+	};
+
+	return (
+		<toastContext.Provider value={{ showToast }}>
+			{children}
+			<div className="toast">
+				{toasts.map((toast, index) => (
+					<ToastComponent
+						key={index}
+						type={toast.type}
+						message={toast.message}
+						onDismiss={() => dismissToast(toast.id)}
+					/>
+				))}
+			</div>
+		</toastContext.Provider>
+	);
+}
+
+export function useToastContext() {
+	const ctx = useContext(toastContext);
+	if (ctx === undefined) {
+		throw new Error("'useToastContext' is being used outside of context");
+	}
+	return ctx;
 }
