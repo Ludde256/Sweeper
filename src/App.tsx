@@ -7,10 +7,10 @@ function App() {
 		<IPLookupContextProvider>
 			<ToastContextProvider>
 				<div className="flex flex-col w-screen h-screen">
-					<div className="flex w-full">
+					<div className="flex justify-center w-full px-4 2xl:px-32 pt-4">
 						<h2>title</h2>
 					</div>
-					<div className="flex w-full h-full p-4 gap-4">
+					<div className="flex flex-col-reverse md:flex-row w-full h-full px-4 2xl:px-32 py-4 gap-4">
 						<Map />
 						<Map />
 					</div>
