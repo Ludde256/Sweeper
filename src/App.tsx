@@ -2,6 +2,7 @@ import { Map } from "./components/map";
 import { ToastContextProvider } from "./contexts/toast";
 import { IPLookupContextProvider } from "./contexts/ipLookup";
 import { LookupList } from "./components/lookupList";
+import { Queryer } from "./components/queryer";
 
 function App() {
 	return (
@@ -14,9 +15,7 @@ function App() {
 					<div className="flex flex-col-reverse md:flex-row w-full h-full px-4 2xl:px-32 py-4 gap-4">
 						<div className="flex flex-col gap-4 w-full">
 							{/* This is the input box component but just empty div for now */}
-							<div className="outline flex justify-center items-center">
-								<h2>Input box</h2>
-							</div>
+							<Queryer />
 							<LookupList />
 						</div>
 						<Map />
