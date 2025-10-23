@@ -9,7 +9,11 @@ interface IPLookupContextValue {
 
 const ipLookupContext = createContext<IPLookupContextValue | undefined>(undefined);
 
-export function IPLookupContextProvider({ children }: { children: React.ReactNode }) {
+interface IPLookupContextProviderProps {
+	children: React.ReactNode;
+}
+
+export function IPLookupContextProvider({ children }: IPLookupContextProviderProps) {
 	const [lookups, setLookups] = useState<IpLookupSuccess[]>([]);
 
 	const addLookup = useCallback(
