@@ -2,8 +2,6 @@ import { useState } from "react";
 
 import { type IpApiResponse, Lookup } from "@/services/ipApi";
 
-import { IPInfo } from "./components/ipInfo";
-
 interface dumpObjectProps {
 	object: any;
 }
@@ -43,14 +41,13 @@ function App() {
 
 	return (
 		<div className="flex items-center justify-center h-screen w-screen">
-			<div className="flex flex-col gap-2">
+			<div className="flex flex-col gap-2 w-[50vw]">
 				<input type="text" className="input" onChange={(e) => setIp(e.target.value)} value={ip} />
 				{loading && <p className="font-bold">Loading...</p>}
 				<button onClick={handleSubmit} className="btn">
 					Submit
 				</button>
 				<DumpObject object={lookup} />
-				<IPInfo />
 			</div>
 		</div>
 	);
