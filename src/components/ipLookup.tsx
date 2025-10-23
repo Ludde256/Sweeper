@@ -5,22 +5,22 @@ interface IpPropertyProps {
 }
 
 function ProxyBadge({ show }: IpPropertyProps) {
-	return <div className="outline p-0.5 "></div>;
+	return <div className="badge badge-soft badge-success">Proxy</div>;
 }
 
 function HostingBadge({ show }: IpPropertyProps) {
-	return <div className="badge badge-soft badge-success">Success</div>;
+	return <div className="badge badge-soft badge-success">Hosting</div>;
 }
 
 function MobileBadge({ show }: IpPropertyProps) {
-	return <div className="outline p-0.5"></div>;
+	return <div className="badge badge-soft badge-success">Mobile</div>;
 }
 
 interface InfoBoxProps {
 	lookup: IpLookupSuccess;
 }
 
-function InfoBox({ lookup }: InfoBoxProps) {
+function GeoInfoBox({ lookup }: InfoBoxProps) {
 	return (
 		<div className="w-full outline m-1 rounded-field">
 			<p>
@@ -34,6 +34,20 @@ function InfoBox({ lookup }: InfoBoxProps) {
 				{lookup.region}
 				{lookup.city}
 				{lookup.zip}
+			</p>
+		</div>
+	);
+}
+
+function InternetInfoBox({ lookup }: InfoBoxProps) {
+	return (
+		<div className="w-full outline m-1 rounded-field">
+			<p>
+				{lookup.isp}
+				{lookup.org}
+				{lookup.as}
+				{lookup.asname}
+				{lookup.reverse}
 			</p>
 		</div>
 	);
@@ -55,7 +69,10 @@ export function IpLookup({ lookup }: IpLookupProps) {
 					<MobileBadge show={lookup.mobile} />
 				</div>
 			</div>
-			<div className="flex flex-row"></div>
+			<div className="flex flex-row">
+				<GeoInfoBox lookup={lookup} />
+				<InternetInfoBox lookup={lookup} />
+			</div>
 		</div>
 	);
 }
