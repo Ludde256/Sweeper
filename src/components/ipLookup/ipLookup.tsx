@@ -8,9 +8,9 @@ interface IpLookupProps {
 
 export function IpLookup({ lookup }: IpLookupProps) {
 	return (
-		<div className="outline rounded-field w-3/4 p-1">
+		<div className="outline rounded-field w-full p-1">
 			<div className="flex flex-row justify-between w-md" style={{ width: "100%" }}>
-				<h3>{lookup.query}</h3>
+				<h3>Searched IP: {lookup.query}</h3>
 				<div className="flex flex-row gap-16">
 					<ProxyBadge show={lookup.proxy} />
 					<HostingBadge show={lookup.hosting} />

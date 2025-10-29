@@ -25,10 +25,9 @@ export function GeoInfoBox({ lookup }: InfoBoxProps) {
 			<TextRow title="Continent" text={`${lookup.continent} (${lookup.continentCode})`} />
 			<TextRow title="Country" text={`${lookup.country} (${lookup.countryCode})`} />
 			<TextRow title="Timezone" text={`${lookup.timezone} (${TimezoneFromOffset(lookup.offset)})`} />
-			{/* {lookup.regionName}
-			{lookup.region}
-			{lookup.city}
-			{lookup.zip} */}
+			<TextRow title="Region" text={`${lookup.region} (${lookup.regionName})`} />
+			<TextRow title="City" text={`${lookup.city}`} />
+			<TextRow title="Zip" text={`${lookup.zip}`} />
 		</div>
 	);
 }
@@ -36,11 +35,11 @@ export function GeoInfoBox({ lookup }: InfoBoxProps) {
 export function InternetInfoBox({ lookup }: InfoBoxProps) {
 	return (
 		<div className="w-full flex flex-col outline m-1 rounded-field">
-			{lookup.isp}
-			{lookup.org}
-			{lookup.as}
-			{lookup.asname}
-			{lookup.reverse}
+			<TextRow title="ISP" text={`${lookup.isp}`} />
+			<TextRow title="Organization" text={`${lookup.org}`} />
+			<TextRow title="AS" text={`${lookup.as}`} />
+			<TextRow title="ASName" text={`${lookup.asname}`} />
+			<TextRow title="Reverse DNS" text={`${lookup.reverse}`} />
 		</div>
 	);
 }
