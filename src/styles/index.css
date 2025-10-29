@@ -1,2 +1,6 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+.box {
+	@apply rounded-box bg-base-200 shadow-md;
+}

@@ -24,7 +24,7 @@ export function Queryer() {
 	};
 
 	return (
-		<div className="flex justify-center items-center">
+		<div className="flex justify-center items-center box h-24">
 			<input type="text" value={ipInput} onChange={(e) => setIpInput(e.target.value)} className="input" />
 			<button className="btn" onClick={handleQuery}>
 				Query
