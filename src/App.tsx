@@ -3,6 +3,7 @@ import { ToastContextProvider } from "./contexts/toast";
 import { IPLookupContextProvider } from "./contexts/ipLookup";
 import { LookupList } from "./components/lookupList";
 import { Queryer } from "./components/queryer";
+import { Sessioner } from "./components/sessioner";
 
 function App() {
 	return (
@@ -15,7 +16,10 @@ function App() {
 					<div className="flex flex-col-reverse md:flex-row w-full h-full gap-4 min-h-0">
 						<div className="flex flex-col gap-4 w-full">
 							{/* This is the input box component but just empty div for now */}
-							<Queryer />
+							<div className="flex w-full gap-4">
+								<Queryer />
+								<Sessioner />
+							</div>
 							<LookupList />
 						</div>
 						<Map />
