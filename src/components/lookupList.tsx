@@ -9,6 +9,9 @@ export function LookupList() {
 			{lookups.map((lookup, index) => (
 				<IpLookup key={index} lookup={lookup} />
 			))}
+			<div className="w-full h-full flex items-center justify-center">
+				<p>IP Lookup List</p>
+			</div>
 		</div>
 	);
 }
