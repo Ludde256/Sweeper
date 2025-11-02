@@ -1,4 +1,4 @@
-import { useIPLookupContext } from "@/contexts/ipLookup";
+import { useLookups } from "@/hooks/lookups";
 import { Trash2 } from "lucide-react";
 
 interface RemoveButtonProps {
@@ -6,10 +6,10 @@ interface RemoveButtonProps {
 }
 
 export function RemoveButton({ parentIp }: RemoveButtonProps) {
-	const { deleteLookup } = useIPLookupContext();
+	const { removeLookup } = useLookups();
 
 	const handleClick = () => {
-		deleteLookup(parentIp);
+		removeLookup(parentIp);
 	};
 
 	return (

@@ -1,8 +1,11 @@
-import { useIPLookupContext } from "@/contexts/ipLookup";
 import { IpLookup } from "@/components/ipLookup";
+import { useSessionContext } from "@/contexts/session";
+import { useMemo } from "react";
 
 export function LookupList() {
-	const { lookups } = useIPLookupContext();
+	const { activeSession } = useSessionContext();
+
+	const lookups = useMemo(() => activeSession.lookups, [activeSession]);
 
 	return (
 		<div className="flex flex-col h-full overflow-y-scroll box p-4 gap-4">
