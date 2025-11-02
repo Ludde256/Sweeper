@@ -1,9 +1,12 @@
 import { useLocalStorage } from "@/hooks/localstorage";
 import type { IpLookupSuccess } from "@/services/ipApi";
+import { randomName } from "@/utils";
 import { createContext, useCallback, useContext, useMemo, type ReactNode } from "react";
+import { useToast } from "./toast";
 
 export type Session = {
 	id: string;
+	name: string;
 	createdAt: number;
 	lookups: IpLookupSuccess[];
 };
@@ -13,7 +16,7 @@ type UpdateSession = Partial<Omit<Session, "id" | "createdAt">>;
 interface SessionContextValues {
 	sessions: Session[];
 	activeSession: Session;
-	newSession(): void;
+	newSession(): boolean;
 	deleteSession: (id: string) => void;
 	setActiveSession: (id: string) => void;
 	updateSession: (id: string, updates: UpdateSession) => void;
@@ -24,12 +27,15 @@ const SessionContext = createContext<SessionContextValues | undefined>(undefined
 function makeSession(): Session {
 	return {
 		id: crypto.randomUUID(),
+		name: randomName(),
 		createdAt: Date.now(),
 		lookups: [],
 	};
 }
 
-export function SessionContextProvider({ children }: { children: ReactNode }) {
+export function SessionProvider({ children }: { children: ReactNode }) {
+	const { showToast } = useToast();
+
 	const [sessions, setSessions] = useLocalStorage<Session[]>("sessions", [makeSession()]);
 	const [activeSessionId, setActiveSessionId] = useLocalStorage<string>("active_session_id", sessions[0].id);
 
@@ -38,16 +44,32 @@ export function SessionContextProvider({ children }: { children: ReactNode }) {
 		[sessions, activeSessionId]
 	);
 
+	const sessionsWithNoLookups = useMemo(() => sessions.filter((s) => s.lookups.length === 0), [sessions]);
+
 	const newSession = useCallback(() => {
+		if (activeSession.lookups.length === 0) {
+			showToast("error", "Cannot create new Session. Active session is empty.");
+			return false;
+		}
+
+		if (sessionsWithNoLookups.length > 0) {
+			showToast("warning", "Session found with no lookups. Reusing...");
+			const session = sessionsWithNoLookups[0];
+			setActiveSessionId(session.id);
+			return false;
+		}
+
 		const session = makeSession();
 		setSessions((prev) => [...prev, session]);
 		setActiveSessionId(session.id);
-	}, [setSessions, setActiveSessionId]);
+		return true;
+	}, [activeSession.lookups.length, sessionsWithNoLookups, setSessions, setActiveSessionId]);
 
 	const deleteSession = useCallback(
 		(id: string) => {
 			if (sessions.length === 1) {
-				throw new Error("Cannot delete the only session");
+				showToast("warning", "Cannot delete the only session");
+				return;
 			}
 
 			setSessions((prev) => {
@@ -93,7 +115,7 @@ export function SessionContextProvider({ children }: { children: ReactNode }) {
 	return <SessionContext.Provider value={value}>{children}</SessionContext.Provider>;
 }
 
-export function useSessionContext() {
+export function useSession() {
 	const context = useContext(SessionContext);
 	if (context === undefined) {
 		throw new Error("useSessionContext must be used within SessionContextProvider");
