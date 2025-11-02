@@ -16,13 +16,13 @@ export interface ToastContextValue {
 	showToast: (type: ToastType, message: string) => void;
 }
 
-const toastContext = createContext<ToastContextValue | undefined>(undefined);
+const ToastContext = createContext<ToastContextValue | undefined>(undefined);
 
-interface ToastContextProviderProps {
+interface ToastProviderProps {
 	children: ReactNode;
 }
 
-export function ToastContextProvider({ children }: ToastContextProviderProps) {
+export function ToastProvider({ children }: ToastProviderProps) {
 	const [toasts, setToasts] = useState<Toast[]>([]);
 
 	// I've been told to optimize context especially because the compiler does not optimize much in this case.
@@ -45,9 +45,9 @@ export function ToastContextProvider({ children }: ToastContextProviderProps) {
 	const value = useMemo(() => ({ showToast }), [showToast]);
 
 	return (
-		<toastContext.Provider value={value}>
+		<ToastContext.Provider value={value}>
 			{children}
-			<div className="toast">
+			<div className="toast z-[9999]">
 				{toasts.map((toast) => (
 					<ToastComponent
 						key={toast.id}
@@ -57,12 +57,12 @@ export function ToastContextProvider({ children }: ToastContextProviderProps) {
 					/>
 				))}
 			</div>
-		</toastContext.Provider>
+		</ToastContext.Provider>
 	);
 }
 
-export function useToastContext() {
-	const ctx = useContext(toastContext);
+export function useToast() {
+	const ctx = useContext(ToastContext);
 	if (ctx === undefined) {
 		throw new Error("'useToastContext' is being used outside of context");
 	}

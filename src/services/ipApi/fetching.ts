@@ -9,7 +9,7 @@ function constructURL(ip: string): string {
 }
 
 // Fetch data from the IP API and return the parsed response
-export async function Lookup(ip: string): Promise<IpApiResponse> {
+export async function FetchIpLookup(ip: string): Promise<IpApiResponse> {
 	const url = constructURL(ip);
 
 	const response = await fetch(url);
