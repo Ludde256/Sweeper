@@ -1,11 +1,11 @@
-import { useSessionContext } from "@/contexts/session";
-import { useToastContext } from "@/contexts/toast";
+import { useSession } from "@/contexts/session";
+import { useToast } from "@/contexts/toast";
 import { FetchIpLookup, IsLookupSuccess } from "@/services/ipApi";
 import { useCallback, useMemo } from "react";
 
 export function useLookups() {
-	const { activeSession, updateSession } = useSessionContext();
-	const { showToast } = useToastContext();
+	const { activeSession, updateSession } = useSession();
+	const { showToast } = useToast();
 
 	const lookups = useMemo(() => activeSession.lookups, [activeSession.lookups]);
 
