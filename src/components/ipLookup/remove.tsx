@@ -13,8 +13,8 @@ export function RemoveButton({ parentIp }: RemoveButtonProps) {
 	};
 
 	return (
-		<button onClick={handleClick} className="btn btn-square btn-soft btn-error p-2">
-			<Trash2 className="w-full h-full" />
+		<button onClick={handleClick} className="btn btn-square btn-soft btn-error">
+			<Trash2 size={28} />
 		</button>
 	);
 }
