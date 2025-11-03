@@ -1,7 +1,7 @@
 import { useLookups } from "@/hooks/lookups";
 import { useMemo } from "react";
 import L, { type LatLngTuple } from "leaflet";
-import { MapContainer, Marker, TileLayer } from "react-leaflet";
+import { MapContainer, Marker, TileLayer, Tooltip } from "react-leaflet";
 
 import { Recenter } from "./recenter";
 
@@ -20,7 +20,11 @@ export function Map() {
 				url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 			/>
 			{positions.map((pos, index) => (
-				<Marker key={`${lookups[index].query}-${pos[0]}-${pos[1]}`} position={pos} />
+				<Marker key={`${lookups[index].query}-${pos[0]}-${pos[1]}`} position={pos}>
+					<Tooltip>
+						<span>{lookups[index].query}</span>
+					</Tooltip>
+				</Marker>
 			))}
 			<Recenter positions={positions} />
 		</MapContainer>
