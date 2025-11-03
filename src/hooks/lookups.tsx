@@ -11,17 +11,18 @@ export function useLookups() {
 
 	const addLookup = useCallback(
 		async (ip: string) => {
-			if (lookups.some((l) => l.query === ip)) {
-				showToast("error", "Cannot add duplicate lookups");
-				return;
-			}
-
 			const response = await FetchIpLookup(ip);
 
 			if (IsLookupSuccess(response)) {
+				if (lookups.some((l) => l.query === response.query)) {
+					showToast("error", "Cannot add duplicate lookups");
+					return;
+				}
+
 				const updatedSession = {
 					lookups: [...lookups, response],
 				};
+
 				updateSession(activeSession.id, updatedSession);
 			} else {
 				console.error(response);
