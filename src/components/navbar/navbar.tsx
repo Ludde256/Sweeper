@@ -1,6 +1,6 @@
-// import { Sessioner } from "./sessioner";
 import { useDrawer } from "@/contexts/drawer";
 import { Menu } from "lucide-react";
+import { ThemePicker } from "./themePicker";
 
 export function Navbar() {
 	const { toggleDrawer } = useDrawer();
@@ -13,6 +13,7 @@ export function Navbar() {
 				</button>
 				<h1 className="font-bold text-3xl">Sweeper</h1>
 			</div>
+			<ThemePicker />
 		</div>
 	);
 }
