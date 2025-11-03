@@ -1,7 +1,7 @@
 // This component is purely responsible for *adding* the custom Leaflet control
 
 import L from "leaflet";
-import { MapPin } from "lucide-react";
+import { Locate } from "lucide-react";
 import { useCallback, useEffect } from "react";
 import { renderToString } from "react-dom/server";
 import { useMap, useMapEvent } from "react-leaflet";
@@ -47,7 +47,7 @@ function RecenterControlWrapper({ positions }: { positions: L.LatLngTuple[] }) {
 				button.title = "Recenter Map";
 				button.role = "button";
 
-				button.innerHTML = renderToString(<MapPin />);
+				button.innerHTML = renderToString(<Locate />);
 
 				// Prevent click events from propagating to the map
 				L.DomEvent.disableClickPropagation(container);
