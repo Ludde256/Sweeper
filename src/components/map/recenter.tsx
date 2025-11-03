@@ -7,8 +7,18 @@ import { renderToString } from "react-dom/server";
 import { useMap, useMapEvent } from "react-leaflet";
 
 import { DEFAULT_POS, DEFAULT_ZOOM } from "./map";
+import { focusMarker } from "./focus";
 
-function recenter(map: L.Map, positions: L.LatLngTuple[]) {
+function recenter(map: L.Map, positions: L.LatLngTuple[], overrideFocusedMarker = false) {
+	if (overrideFocusedMarker) {
+		focusMarker.value = undefined;
+	}
+
+	if (focusMarker.value) {
+		map.setView(focusMarker.value, 13);
+		return;
+	}
+
 	if (positions.length === 0) {
 		map.setView(DEFAULT_POS, DEFAULT_ZOOM);
 	} else if (positions.length === 1) {
@@ -44,7 +54,7 @@ function RecenterControlWrapper({ positions }: { positions: L.LatLngTuple[] }) {
 				L.DomEvent.on(button, "click", L.DomEvent.stop).on(
 					button,
 					"click",
-					() => recenter(mapInstance, positions),
+					() => recenter(mapInstance, positions, true),
 					this
 				);
 

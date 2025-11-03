@@ -2,7 +2,7 @@ import { signal } from "@preact/signals-react";
 import { useEffect } from "react";
 import { useMap } from "react-leaflet";
 
-const focusMarker = signal<L.LatLngTuple | undefined>(undefined);
+export const focusMarker = signal<L.LatLngTuple | undefined>(undefined);
 
 export function setFocusMarker(lat: number, lng: number) {
 	focusMarker.value = [lat, lng] as L.LatLngTuple;
