@@ -17,11 +17,9 @@ export function Session({ isActive, disableDelete, session, onActive, onDelete }
 	};
 
 	return (
-		<div
-			tabIndex={0}
-			role="button"
+		<button
 			onClick={onActive}
-			className={`flex items-center justify-between p-4 rounded-box border-2 transition-all cursor-pointer hover:shadow-md ${
+			className={`flex items-center justify-between p-4 rounded-box border-2 transition-all cursor-pointer shadow hover:shadow-md ${
 				isActive ? "border-primary bg-primary/10" : "border-base-300 bg-base-200"
 			}`}
 		>
@@ -46,6 +44,6 @@ export function Session({ isActive, disableDelete, session, onActive, onDelete }
 			>
 				<Trash2 size={18} />
 			</button>
-		</div>
+		</button>
 	);
 }

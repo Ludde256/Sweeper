@@ -8,6 +8,14 @@
 	@apply rounded-box bg-base-200 shadow-md;
 }
 
+.navbar-btn {
+	@apply btn btn-ghost bg-base-300 text-lg font-semibold;
+}
+
+.navbar-section {
+	@apply flex items-center;
+}
+
 .leaflet-bar a {
 	@apply bg-primary text-primary-content;
 	@apply flex items-center justify-center;
@@ -28,5 +36,5 @@
 }
 
 .custom-map-marker {
-	@apply text-primary;
+	@apply text-info;
 }

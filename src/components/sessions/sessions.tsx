@@ -1,10 +1,13 @@
 import { useSession } from "@/contexts/session";
-import { Plus } from "lucide-react";
+import { Plus, X } from "lucide-react";
 import { Session } from "./session";
 import { useMemo } from "react";
+import { useDrawer } from "@/contexts/drawer";
 
 export function Sessioner() {
 	const { sessions, activeSession, newSession, deleteSession, setActiveSession } = useSession();
+
+	const { closeDrawer } = useDrawer();
 
 	const sortedSessions = useMemo(() => sessions.sort((a, b) => b.createdAt - a.createdAt), [sessions]);
 
@@ -13,12 +16,19 @@ export function Sessioner() {
 	};
 
 	return (
-		<div className="flex flex-col h-full gap-4">
-			<button className="btn btn-primary mt-4 mx-4" onClick={handleNewSession}>
+		<div className="flex flex-col h-full w-full gap-4">
+			<div className="flex items-center justify-between pt-4 px-4">
+				<span className="font-bold text-lg">Session Manager</span>
+				<button onClick={closeDrawer} className="btn btn-circle">
+					<X />
+				</button>
+			</div>
+			<button className="btn btn-primary mx-4" onClick={handleNewSession}>
 				<Plus />
 				New Session
 			</button>
-			<div className="flex flex-col gap-2 p-4 h-full overflow-y-auto">
+			<div className="divider m-0 mx-4" />
+			<div className="flex flex-col gap-2 pb-4 px-4 h-full overflow-y-auto">
 				{sortedSessions.map((session) => (
 					<Session
 						key={session.id}

@@ -1,9 +1,8 @@
-import { createContext, useCallback, useContext, useRef, type ReactNode } from "react";
+import { createContext, useCallback, useContext, useMemo, useRef, type ReactNode } from "react";
 
 interface DrawerContextValues {
 	openDrawer: () => void;
 	closeDrawer: () => void;
-	toggleDrawer: () => void;
 }
 
 const DrawerContext = createContext<DrawerContextValues | undefined>(undefined);
@@ -26,12 +25,10 @@ export function DrawerContextProvider({ children, drawerContent }: DrawerContext
 		if (checkboxRef.current) checkboxRef.current.checked = false;
 	}, [checkboxRef]);
 
-	const toggleDrawer = useCallback(() => {
-		if (checkboxRef.current) checkboxRef.current.checked = !checkboxRef.current.checked;
-	}, [checkboxRef]);
+	const value = useMemo(() => ({ openDrawer, closeDrawer }), [openDrawer, closeDrawer]);
 
 	return (
-		<DrawerContext.Provider value={{ openDrawer, closeDrawer, toggleDrawer }}>
+		<DrawerContext.Provider value={value}>
 			<div className="drawer">
 				<input ref={checkboxRef} id={drawerId} type="checkbox" className="drawer-toggle" />
 				<div className="drawer-content">{children}</div>
