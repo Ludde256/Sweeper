@@ -19,7 +19,7 @@ export function Sessioner() {
 		<div className="flex flex-col h-full w-full gap-4">
 			<div className="flex items-center justify-between pt-4 px-4">
 				<span className="font-bold text-lg">Session Manager</span>
-				<button onClick={closeDrawer} className="btn btn-circle">
+				<button onClick={closeDrawer} className="btn btn-ghost btn-circle">
 					<X />
 				</button>
 			</div>
