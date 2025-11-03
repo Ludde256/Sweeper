@@ -1,12 +1,18 @@
 import { useEffect, useState } from "react";
 
 export function useMediaQuery(query: string): boolean {
-	const [matches, setMatches] = useState<boolean>(false);
+	// Read initial value synchronously before first render
+	const [matches, setMatches] = useState<boolean>(() => {
+		if (typeof window !== "undefined") {
+			return window.matchMedia(query).matches;
+		}
+		return false;
+	});
 
 	useEffect(() => {
 		const mediaQuery = window.matchMedia(query);
 
-		// Set initial value
+		// Set initial value (in case it changed between mount and effect)
 		setMatches(mediaQuery.matches);
 
 		// Listen for changes
@@ -22,17 +28,4 @@ export function useMediaQuery(query: string): boolean {
 	}, [query]);
 
 	return matches;
-}
-
-// Helper hooks for common Tailwind breakpoints
-export function useIsMobile() {
-	return useMediaQuery("(max-width: 767px)"); // < md
-}
-
-export function useIsTablet() {
-	return useMediaQuery("(min-width: 768px) and (max-width: 1023px)"); // md to lg
-}
-
-export function useIsDesktop() {
-	return useMediaQuery("(min-width: 768px)"); // >= md
 }
