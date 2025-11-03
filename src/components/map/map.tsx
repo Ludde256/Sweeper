@@ -5,7 +5,7 @@ import { useMemo } from "react";
 import { MapContainer, Marker, TileLayer, Tooltip } from "react-leaflet";
 
 import { Recenter } from "./recenter";
-import { FocusMarker } from "./focus";
+import { FocusMarker, setFocusMarker } from "./focus";
 import { useIsDarkTheme } from "@/contexts/theme";
 
 export const DEFAULT_POS = [51.505, -0.09] as L.LatLngTuple; // London
@@ -49,7 +49,13 @@ export function Map() {
 				url={mapUrl}
 			/>
 			{markers.map((marker, index) => (
-				<Marker key={`${marker.Ip}-${marker.latLng[0]}-${marker.latLng[1]}`} position={marker.latLng}>
+				<Marker
+					key={`${marker.Ip}`}
+					eventHandlers={{
+						click: () => setFocusMarker(marker.latLng[0], marker.latLng[1]),
+					}}
+					position={marker.latLng}
+				>
 					<Tooltip>
 						<span>{lookups[index].query}</span>
 					</Tooltip>

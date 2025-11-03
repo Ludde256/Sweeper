@@ -14,7 +14,7 @@ export function FocusMarker() {
 	const map = useMap();
 
 	useEffect(() => {
-		focusMarker.subscribe((newValue) => {
+		return focusMarker.subscribe((newValue) => {
 			if (newValue) {
 				map.setView(newValue, 13);
 			}
