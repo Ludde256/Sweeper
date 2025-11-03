@@ -1,4 +1,4 @@
-import { useLookups } from "@/hooks/lookups";
+import { useLookups } from "@/hooks/useLookups";
 import { Trash2 } from "lucide-react";
 
 interface RemoveButtonProps {

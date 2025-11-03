@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLookups } from "@/hooks/lookups";
+import { useLookups } from "@/hooks/useLookups";
 
 export function Queryer() {
 	const { addLookup } = useLookups();

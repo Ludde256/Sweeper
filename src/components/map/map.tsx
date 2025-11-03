@@ -1,6 +1,6 @@
 import L from "leaflet";
 
-import { useLookups } from "@/hooks/lookups";
+import { useLookups } from "@/hooks/useLookups";
 import { useMemo } from "react";
 import { MapContainer, Marker, TileLayer, Tooltip } from "react-leaflet";
 

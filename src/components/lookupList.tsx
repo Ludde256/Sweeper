@@ -1,5 +1,5 @@
 import { IpLookup } from "@/components/ipLookup";
-import { useLookups } from "@/hooks/lookups";
+import { useLookups } from "@/hooks/useLookups";
 
 export function LookupList() {
 	const { lookups } = useLookups();

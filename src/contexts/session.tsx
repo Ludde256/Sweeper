@@ -1,4 +1,4 @@
-import { useLocalStorage } from "@/hooks/localstorage";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 import type { IpLookupSuccess } from "@/services/ipApi";
 import { randomName } from "@/utils";
 import { createContext, useCallback, useContext, useMemo, type ReactNode } from "react";
