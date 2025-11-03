@@ -8,7 +8,7 @@ export function Navbar() {
 	return (
 		<div className="flex justify-between items-center w-full box h-24 min-h-0 px-6">
 			<div className="flex items-center gap-4">
-				<button className="btn btn-soft btn-square" aria-label="Session Drawer" onClick={toggleDrawer}>
+				<button className="btn btn-ghost btn-square" aria-label="Session Drawer" onClick={toggleDrawer}>
 					<Menu size={32} />
 				</button>
 				<h1 className="font-bold text-3xl">Sweeper</h1>
