@@ -8,8 +8,9 @@ export function Navbar() {
 	return (
 		<div className="flex items-center w-full box h-24 min-h-0 px-6">
 			<div className="navbar-section justify-start w-1/3">
-				<button className="btn btn-xl btn-ghost btn-square" title="Session Drawer" onClick={openDrawer}>
+				<button className="btn btn-xl btn-ghost px-2" title="Session Drawer" onClick={openDrawer}>
 					<Menu size="42" />
+					<span className="font-mono hidden sm:block">Sessions</span>
 				</button>
 			</div>
 			<div className="navbar-section justify-center w-1/3">
