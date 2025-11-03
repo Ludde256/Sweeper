@@ -4,3 +4,22 @@
 .box {
 	@apply rounded-box bg-base-200 shadow-md;
 }
+
+.leaflet-bar a {
+	@apply bg-primary text-primary-content;
+	@apply flex items-center justify-center;
+	width: 2.8rem !important;
+	height: 2.8rem !important;
+}
+
+.leaflet-bar a:focus {
+	@apply bg-primary text-primary-content;
+}
+
+.leaflet-bar a:hover {
+	@apply bg-primary text-primary-content;
+}
+
+.leaflet-bar a.leaflet-disabled {
+	@apply bg-base-200 text-base-content;
+}
