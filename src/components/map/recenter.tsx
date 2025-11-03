@@ -78,7 +78,8 @@ export function Recenter({ positions }: { positions: L.LatLngTuple[] }) {
 
 	const handleRecenter = useCallback(() => recenter(map, positions), [map, positions]);
 
-	useEffect(() => handleRecenter(), [handleRecenter]);
+	// This runs when the component mounts and whenever positions change
+	useEffect(() => recenter(map, positions, true), [map, positions]);
 
 	useMapEvent("resize", handleRecenter);
 	useMapEvent("load", handleRecenter);
