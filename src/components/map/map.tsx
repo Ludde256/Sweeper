@@ -6,9 +6,13 @@ import { MapContainer, Marker, TileLayer, Tooltip } from "react-leaflet";
 
 import { Recenter } from "./recenter";
 import { FocusMarker } from "./focus";
+import { useIsDarkTheme } from "@/contexts/theme";
 
 export const DEFAULT_POS = [51.505, -0.09] as L.LatLngTuple; // London
 export const DEFAULT_ZOOM = 10;
+
+const DARK_MAP_URL = "https://basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png";
+const LIGHT_MAP_URL = "https://basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png";
 
 type IpMarker = {
 	latLng: L.LatLngTuple;
@@ -17,6 +21,9 @@ type IpMarker = {
 
 export function Map() {
 	const { lookups } = useLookups();
+	const isDarkMode = useIsDarkTheme();
+
+	const mapUrl = useMemo(() => (isDarkMode ? DARK_MAP_URL : LIGHT_MAP_URL), [isDarkMode]);
 
 	const markers: IpMarker[] = useMemo(
 		() =>
@@ -39,7 +46,7 @@ export function Map() {
 		>
 			<TileLayer
 				attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-				url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+				url={mapUrl}
 			/>
 			{markers.map((marker, index) => (
 				<Marker key={`${marker.Ip}-${marker.latLng[0]}-${marker.latLng[1]}`} position={marker.latLng}>

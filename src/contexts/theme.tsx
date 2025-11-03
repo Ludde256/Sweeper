@@ -38,7 +38,24 @@ export const themes = [
 	"caramellatte",
 	"abyss",
 	"silk",
-] as const;
+];
+
+export const darkThemes = [
+	"dark",
+	"synthwave",
+	"halloween",
+	"forest",
+	"aqua",
+	"black",
+	"luxury",
+	"dracula",
+	"business",
+	"night",
+	"coffee",
+	"dim",
+	"sunset",
+	"abyss",
+];
 
 export type Theme = (typeof themes)[number];
 
@@ -52,9 +69,16 @@ const ThemeContext = createContext<ToastContextValue | undefined>(undefined);
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
 	const prefersDark = usePrefersDark();
 
-	const [currTheme, setCurrTheme] = useLocalStorage<Theme>("theme", prefersDark ? "dark" : "light");
+	const defaultTheme = useMemo<Theme>(() => (prefersDark ? "dark" : "light"), [prefersDark]);
+
+	const [currTheme, setCurrTheme] = useLocalStorage<Theme>("theme", defaultTheme);
 
 	useEffect(() => {
+		if (!themes.includes(currTheme)) {
+			// This gets rerun when currTheme is updated
+			setCurrTheme(defaultTheme);
+			return;
+		}
 		document.documentElement.setAttribute("data-theme", currTheme);
 	}, [currTheme]);
 
@@ -71,4 +95,12 @@ export function useTheme() {
 		throw new Error("useTheme must be used within a ThemeProvider");
 	}
 	return context;
+}
+
+export function useIsDarkTheme() {
+	const { currTheme } = useTheme();
+
+	const value = useMemo(() => darkThemes.includes(currTheme), [currTheme]);
+
+	return value;
 }
