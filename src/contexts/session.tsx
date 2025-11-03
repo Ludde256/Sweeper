@@ -47,17 +47,17 @@ export function SessionProvider({ children }: { children: ReactNode }) {
 	const sessionsWithNoLookups = useMemo(() => sessions.filter((s) => s.lookups.length === 0), [sessions]);
 
 	const newSession = useCallback(() => {
-		if (activeSession.lookups.length === 0) {
-			showToast("error", "Cannot create new Session. Active session is empty.");
-			return false;
-		}
+		// if (activeSession.lookups.length === 0) {
+		// 	showToast("error", "Cannot create new Session. Active session is empty.");
+		// 	return false;
+		// }
 
-		if (sessionsWithNoLookups.length > 0) {
-			showToast("warning", "Session found with no lookups. Reusing...");
-			const session = sessionsWithNoLookups[0];
-			setActiveSessionId(session.id);
-			return false;
-		}
+		// if (sessionsWithNoLookups.length > 0) {
+		// 	showToast("warning", "Session found with no lookups. Reusing...");
+		// 	const session = sessionsWithNoLookups[0];
+		// 	setActiveSessionId(session.id);
+		// 	return false;
+		// }
 
 		const session = makeSession();
 		setSessions((prev) => [...prev, session]);
