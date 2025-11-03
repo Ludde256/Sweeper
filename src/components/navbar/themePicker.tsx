@@ -6,15 +6,12 @@ export function ThemePreview({ theme }: { theme: string }) {
 	return (
 		<div
 			data-theme={theme}
-			className="bg-base-100 border border-base-content/20 rounded-box p-1 flex-shrink-0"
-			style={{ width: "24px", height: "24px" }}
+			className="bg-base-100 border-base-content/15 grid shrink-0 grid-cols-2 gap-1 rounded-box border p-1 transition-colors"
 		>
-			<div className="grid grid-cols-2 gap-1 w-full h-full">
-				<div className="bg-base-content rounded-box" />
-				<div className="bg-primary rounded-box" />
-				<div className="bg-secondary rounded-box" />
-				<div className="bg-accent rounded-box" />
-			</div>
+			<div className="bg-base-content size-1.5 rounded-box"></div>
+			<div className="bg-primary size-1.5 rounded-box"></div>
+			<div className="bg-secondary size-1.5 rounded-box"></div>
+			<div className="bg-accent size-1.5 rounded-box"></div>
 		</div>
 	);
 }
