@@ -22,18 +22,18 @@
 
 .leaflet-bar a {
 	@apply !rounded-box !border-0;
-	@apply bg-primary text-primary-content;
+	@apply bg-secondary text-secondary-content;
 	@apply flex items-center justify-center;
 	width: 2.5rem !important;
 	height: 2.5rem !important;
 }
 
 .leaflet-bar a:focus {
-	@apply bg-primary text-primary-content;
+	@apply bg-secondary text-secondary-content;
 }
 
 .leaflet-bar a:hover {
-	@apply bg-primary/80 text-primary-content;
+	@apply bg-secondary/80 text-secondary-content;
 }
 
 .leaflet-bar a.leaflet-disabled {
@@ -41,5 +41,5 @@
 }
 
 .custom-map-marker {
-	@apply text-info;
+	@apply text-secondary;
 }

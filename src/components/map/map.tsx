@@ -7,8 +7,6 @@ import { MapContainer, Marker, TileLayer, Tooltip } from "react-leaflet";
 import { Recenter } from "./recenter";
 import { FocusMarker } from "./focus";
 import { useIsDarkTheme } from "@/contexts/theme";
-import { renderToString } from "react-dom/server";
-import { MapPin } from "lucide-react";
 
 export const DEFAULT_POS = [51.505, -0.09] as L.LatLngTuple; // London
 export const DEFAULT_ZOOM = 10;
@@ -20,14 +18,6 @@ type IpMarker = {
 	latLng: L.LatLngTuple;
 	Ip: string;
 };
-
-// const customDivIcon = new L.DivIcon({
-// 	className: "custom-map-marker", // You can style this class in your CSS
-// 	html: renderToString(<MapPin size={32}></MapPin>),
-// 	iconSize: [32, 32],
-// 	iconAnchor: [16, 32], // Adjust for the bottom-center of your div
-// 	popupAnchor: [0, -40],
-// });
 
 export function Map() {
 	const { lookups } = useLookups();
@@ -59,11 +49,7 @@ export function Map() {
 				url={mapUrl}
 			/>
 			{markers.map((marker, index) => (
-				<Marker
-					key={`${marker.Ip}-${marker.latLng[0]}-${marker.latLng[1]}`}
-					position={marker.latLng}
-					// icon={customDivIcon}
-				>
+				<Marker key={`${marker.Ip}-${marker.latLng[0]}-${marker.latLng[1]}`} position={marker.latLng}>
 					<Tooltip>
 						<span>{lookups[index].query}</span>
 					</Tooltip>

@@ -1,8 +1,6 @@
 import { type Session } from "@/contexts/session";
-import { useInterval } from "@/hooks/useInterval";
 import { formatRelativeDate } from "@/utils";
 import { Trash2 } from "lucide-react";
-import { use, useMemo, useState } from "react";
 
 interface SessionProps {
 	isActive: boolean;
