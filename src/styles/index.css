@@ -8,10 +8,6 @@
 	@apply rounded-box bg-base-200 shadow-md;
 }
 
-.navbar-btn {
-	@apply btn btn-ghost bg-base-300 text-lg font-semibold;
-}
-
 .navbar-section {
 	@apply flex items-center;
 }

@@ -1,6 +1,6 @@
 import { useTheme, themes, type Theme } from "@/contexts/theme";
 import { capitalize } from "@/utils";
-import { Check } from "lucide-react";
+import { Check, ChevronDown } from "lucide-react";
 
 export function ThemePreview({ theme }: { theme: string }) {
 	return (
@@ -32,7 +32,7 @@ function ThemeList({ currTheme, setTheme }: ThemeListProps) {
 					<button onClick={() => setTheme(t)} className="btn btn-ghost justify-between w-full flex items-center">
 						<div className="flex items-center gap-2">
 							<ThemePreview theme={t} />
-							<span>{capitalize(t)}</span>
+							<span className="font-mono">{capitalize(t)}</span>
 						</div>
 						{currTheme === t && <Check size={18} strokeWidth={3} />}
 					</button>
@@ -47,9 +47,10 @@ export function ThemePicker() {
 
 	return (
 		<div className="dropdown dropdown-end">
-			<button className="navbar-btn" title="Theme Picker">
+			<button className="btn btn-ghost font-mono" title="Theme Picker">
 				<ThemePreview theme={currTheme} />
 				<span className="hidden sm:block">{capitalize(currTheme)}</span>
+				<ChevronDown size={16} />
 			</button>
 			<div className="dropdown-content bg-base-200 mt-4 border border-base-300 rounded-box shadow-lg">
 				<div className="w-full h-full px-4 pt-4">
