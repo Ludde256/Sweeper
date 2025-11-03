@@ -8,7 +8,7 @@ interface FocusMarkerProps {
 
 export function FocusMarker({ lat, lng }: FocusMarkerProps) {
 	return (
-		<button onClick={() => setFocusMarker(lat, lng)} className="btn btn-square btn-soft btn-outline">
+		<button onClick={() => setFocusMarker(lat, lng)} className="btn btn-square btn-soft btn-info">
 			<MapPin size={28} />
 		</button>
 	);
