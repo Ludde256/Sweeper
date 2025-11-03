@@ -21,13 +21,13 @@ type IpMarker = {
 	Ip: string;
 };
 
-const customDivIcon = new L.DivIcon({
-	className: "custom-map-marker", // You can style this class in your CSS
-	html: renderToString(<MapPin size={32}></MapPin>),
-	iconSize: [32, 32],
-	iconAnchor: [16, 32], // Adjust for the bottom-center of your div
-	popupAnchor: [0, -40],
-});
+// const customDivIcon = new L.DivIcon({
+// 	className: "custom-map-marker", // You can style this class in your CSS
+// 	html: renderToString(<MapPin size={32}></MapPin>),
+// 	iconSize: [32, 32],
+// 	iconAnchor: [16, 32], // Adjust for the bottom-center of your div
+// 	popupAnchor: [0, -40],
+// });
 
 export function Map() {
 	const { lookups } = useLookups();
@@ -62,7 +62,7 @@ export function Map() {
 				<Marker
 					key={`${marker.Ip}-${marker.latLng[0]}-${marker.latLng[1]}`}
 					position={marker.latLng}
-					icon={customDivIcon}
+					// icon={customDivIcon}
 				>
 					<Tooltip>
 						<span>{lookups[index].query}</span>

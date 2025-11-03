@@ -16,11 +16,16 @@
 	@apply flex items-center;
 }
 
+.leaflet-bar {
+	@apply !border-0 flex flex-col gap-1;
+}
+
 .leaflet-bar a {
+	@apply !rounded-box !border-0;
 	@apply bg-primary text-primary-content;
 	@apply flex items-center justify-center;
-	width: 2.8rem !important;
-	height: 2.8rem !important;
+	width: 2.5rem !important;
+	height: 2.5rem !important;
 }
 
 .leaflet-bar a:focus {
@@ -28,7 +33,7 @@
 }
 
 .leaflet-bar a:hover {
-	@apply bg-primary text-primary-content;
+	@apply bg-primary/80 text-primary-content;
 }
 
 .leaflet-bar a.leaflet-disabled {

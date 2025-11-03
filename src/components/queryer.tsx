@@ -11,7 +11,7 @@ export function Queryer() {
 	};
 
 	return (
-		<div className="flex w-full justify-center items-center box gap-2 h-32 px-10">
+		<div className="flex w-full justify-center items-center box gap-2 h-32 px-6">
 			<input
 				type="text"
 				placeholder="Lookup on IP or URL"

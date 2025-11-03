@@ -1,6 +1,8 @@
 import { type Session } from "@/contexts/session";
+import { useInterval } from "@/hooks/useInterval";
 import { formatRelativeDate } from "@/utils";
 import { Trash2 } from "lucide-react";
+import { use, useMemo, useState } from "react";
 
 interface SessionProps {
 	isActive: boolean;
@@ -17,7 +19,9 @@ export function Session({ isActive, disableDelete, session, onActive, onDelete }
 	};
 
 	return (
-		<button
+		<div
+			tabIndex={0}
+			role="button"
 			onClick={onActive}
 			className={`flex items-center justify-between p-4 rounded-box border-2 transition-all cursor-pointer shadow hover:shadow-md ${
 				isActive ? "border-primary bg-primary/10" : "border-base-300 bg-base-200"
@@ -44,6 +48,6 @@ export function Session({ isActive, disableDelete, session, onActive, onDelete }
 			>
 				<Trash2 size={18} />
 			</button>
-		</button>
+		</div>
 	);
 }
