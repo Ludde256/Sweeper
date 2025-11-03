@@ -3,6 +3,7 @@ import type { IpLookupSuccess } from "@/services/ipApi";
 import { randomName } from "@/utils";
 import { createContext, useCallback, useContext, useMemo, type ReactNode } from "react";
 import { useToast } from "./toast";
+import { v7 as uuidv7 } from "uuid";
 
 export type Session = {
 	id: string;
@@ -26,7 +27,7 @@ const SessionContext = createContext<SessionContextValues | undefined>(undefined
 
 function makeSession(): Session {
 	return {
-		id: crypto.randomUUID(),
+		id: uuidv7(),
 		name: randomName(),
 		createdAt: Date.now(),
 		lookups: [],
@@ -48,13 +49,13 @@ export function SessionProvider({ children }: { children: ReactNode }) {
 
 	const newSession = useCallback(() => {
 		if (activeSession.lookups.length === 0) {
-			showToast("error", "Cannot create new Session. Active session is empty.");
+			showToast("error", `Active session (${activeSession.name}) is empty.`);
 			return false;
 		}
 
 		if (sessionsWithNoLookups.length > 0) {
-			showToast("warning", "Session found with no lookups. Reusing...");
 			const session = sessionsWithNoLookups[0];
+			showToast("warning", `Reusing "${session.name}" since it has no lookups...`);
 			setActiveSessionId(session.id);
 			return false;
 		}

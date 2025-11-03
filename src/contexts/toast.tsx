@@ -7,7 +7,7 @@ const TOAST_TIMEOUT = 5000;
 export type ToastType = "success" | "warning" | "error";
 
 type Toast = {
-	id: string;
+	id: number;
 	type: ToastType;
 	message: string;
 };
@@ -26,13 +26,16 @@ export function ToastProvider({ children }: ToastProviderProps) {
 	const [toasts, setToasts] = useState<Toast[]>([]);
 
 	// I've been told to optimize context especially because the compiler does not optimize much in this case.
-	const dismissToast = useCallback((id: string) => {
-		setToasts((prev) => prev.filter((toast) => toast.id !== id));
-	}, []);
+	const dismissToast = useCallback(
+		(id: number) => {
+			setToasts((prev) => prev.filter((toast) => toast.id !== id));
+		},
+		[setToasts]
+	);
 
 	const showToast = useCallback(
 		(type: ToastType, message: string) => {
-			const id = crypto.randomUUID() as string;
+			const id = Date.now();
 			const toast: Toast = { id, type, message };
 
 			setToasts((prev) => [...prev.slice(0, MAX_TOASTS - 1), toast]);
