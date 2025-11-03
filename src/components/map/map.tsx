@@ -1,9 +1,11 @@
 import L from "leaflet";
+
 import { useLookups } from "@/hooks/lookups";
 import { useMemo } from "react";
 import { MapContainer, Marker, TileLayer, Tooltip } from "react-leaflet";
 
 import { Recenter } from "./recenter";
+import { FocusMarker } from "./focus";
 
 export const DEFAULT_POS = [51.505, -0.09] as L.LatLngTuple; // London
 export const DEFAULT_ZOOM = 10;
@@ -47,6 +49,7 @@ export function Map() {
 				</Marker>
 			))}
 			<Recenter positions={positions} />
+			<FocusMarker />
 		</MapContainer>
 	);
 }
