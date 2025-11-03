@@ -9,6 +9,11 @@ export function LookupList() {
 			{lookups.map((lookup, index) => (
 				<IpLookup key={index} lookup={lookup} />
 			))}
+			{lookups.length === 0 && (
+				<div className="flex items-center justify-center size-full text-lg font-bold text-base-content/50">
+					No lookups performed yet...
+				</div>
+			)}
 		</div>
 	);
 }
