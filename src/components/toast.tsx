@@ -26,7 +26,7 @@ export function Toast({ type, message, onDismiss }: ToastProps) {
 	return (
 		<button onClick={onDismiss} className="alert cursor-pointer">
 			<Icon type={type} />
-			{message}
+			<span className="font-semibold text-md">{message}</span>
 		</button>
 	);
 }
