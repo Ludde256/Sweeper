@@ -6,10 +6,10 @@
 }
 
 .leaflet-bar a {
-	@apply bg-base-100 hover:bg-base-200 text-base-content;
+	@apply bg-primary hover:bg-primary text-primary-content;
 	@apply flex items-center justify-center;
 }
 
 .leaflet-bar a:focus {
-	@apply outline-none bg-base-200 text-base-content ring-2 ring-primary;
+	@apply bg-primary text-primary-content;
 }
