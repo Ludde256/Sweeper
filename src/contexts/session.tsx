@@ -49,7 +49,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
 
 	const newSession = useCallback(() => {
 		if (activeSession.lookups.length === 0) {
-			showToast("error", `Active session (${activeSession.name}) is empty.`);
+			showToast("error", `Active session "${activeSession.name}" is empty.`);
 			return false;
 		}
 
