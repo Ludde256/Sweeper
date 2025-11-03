@@ -1,6 +1,8 @@
 import type { ToastType } from "@/contexts/toast";
 import { CircleX, CircleAlert, CircleCheck } from "lucide-react";
 
+const ICON_SIZE = 24;
+
 interface IconProps {
 	type: ToastType;
 }
@@ -8,11 +10,11 @@ interface IconProps {
 function Icon({ type }: IconProps) {
 	switch (type) {
 		case "success":
-			return <CircleCheck className="text-success" />;
+			return <CircleCheck size={ICON_SIZE} className="text-success" />;
 		case "warning":
-			return <CircleAlert className="text-warning" />;
+			return <CircleAlert size={ICON_SIZE} className="text-warning" />;
 		case "error":
-			return <CircleX className="text-error" />;
+			return <CircleX size={ICON_SIZE} className="text-error" />;
 	}
 }
 
