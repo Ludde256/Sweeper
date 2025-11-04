@@ -1,5 +1,5 @@
 import { useTheme, themes, type Theme } from "@/contexts/theme";
-import { capitalize } from "@/utils";
+import { formatThemeName } from "@/utils";
 import { Check, ChevronDown, RotateCcw } from "lucide-react";
 
 export function ThemePreview({ theme }: { theme: string }) {
@@ -29,7 +29,7 @@ function ThemeList({ currTheme, setTheme }: ThemeListProps) {
 					<button onClick={() => setTheme(t)} className="btn btn-ghost flex w-full justify-between items-center">
 						<div className="flex items-center gap-2">
 							<ThemePreview theme={t} />
-							<span className="font-mono">{capitalize(t)}</span>
+							<span className="font-mono">{formatThemeName(t)}</span>
 						</div>
 						{currTheme === t && <Check size={18} strokeWidth={3} />}
 					</button>
@@ -46,7 +46,7 @@ export function ThemePicker() {
 		<div className="dropdown dropdown-end">
 			<button className="btn btn-ghost border border-base-300" title="Theme Picker">
 				<ThemePreview theme={currTheme} />
-				<span className="font-mono text-base-content/70 hidden sm:block">{capitalize(currTheme)}</span>
+				<span className="font-mono text-base-content/70 hidden sm:block">{formatThemeName(currTheme)}</span>
 				<ChevronDown size={16} />
 			</button>
 			<div className="dropdown-content bg-base-200 mt-4 border border-base-300 rounded-box shadow-lg">
