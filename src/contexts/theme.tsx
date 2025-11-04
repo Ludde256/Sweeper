@@ -38,6 +38,7 @@ export const themes = [
 	"caramellatte",
 	"abyss",
 	"silk",
+	"purplewind",
 ];
 
 export const darkThemes = [
@@ -61,6 +62,7 @@ export type Theme = (typeof themes)[number];
 
 interface ToastContextValue {
 	currTheme: Theme;
+	isDarkTheme: boolean;
 	setTheme: (newTheme: Theme) => void;
 	setDefaultTheme: () => void;
 }
@@ -74,12 +76,16 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
 	const [currTheme, setCurrTheme] = useLocalStorage<Theme>("theme", defaultTheme);
 
+	const isDarkTheme = useMemo(() => darkThemes.includes(currTheme), [currTheme]);
+
+	// This is what applies the theme to the document
 	useEffect(() => {
+		// Do a check to ensure the theme is valid and set it to default if not
 		if (!themes.includes(currTheme)) {
-			// This gets rerun when currTheme is updated
 			setCurrTheme(defaultTheme);
 			return;
 		}
+
 		document.documentElement.setAttribute("data-theme", currTheme);
 	}, [currTheme]);
 
@@ -87,7 +93,10 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
 	const setDefaultTheme = useCallback(() => setCurrTheme(defaultTheme), [defaultTheme, setCurrTheme]);
 
-	const value = useMemo(() => ({ currTheme, setTheme, setDefaultTheme }), [currTheme, setTheme, setDefaultTheme]);
+	const value = useMemo(
+		() => ({ currTheme, isDarkTheme, setTheme, setDefaultTheme }),
+		[currTheme, isDarkTheme, setTheme, setDefaultTheme]
+	);
 
 	return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
 }
@@ -98,12 +107,4 @@ export function useTheme() {
 		throw new Error("useTheme must be used within a ThemeProvider");
 	}
 	return context;
-}
-
-export function useIsDarkTheme() {
-	const { currTheme } = useTheme();
-
-	const value = useMemo(() => darkThemes.includes(currTheme), [currTheme]);
-
-	return value;
 }

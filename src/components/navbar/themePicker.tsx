@@ -24,14 +24,15 @@ interface ThemeListProps {
 function ThemeList({ currTheme, setTheme }: ThemeListProps) {
 	return (
 		<ul tabIndex={0} className="flex flex-col pl-2 pb-2 w-64 h-[40vh] overflow-y-scroll">
-			{themes.map((t) => (
-				<li key={t} value={t}>
-					<button onClick={() => setTheme(t)} className="btn btn-ghost flex w-full justify-between items-center">
+			{themes.map((theme) => (
+				<li key={theme} value={theme}>
+					<button onClick={() => setTheme(theme)} className="btn btn-ghost flex w-full justify-between items-center">
 						<div className="flex items-center gap-2">
-							<ThemePreview theme={t} />
-							<span className="font-mono">{formatThemeName(t)}</span>
+							<ThemePreview theme={theme} />
+							<span className="font-mono">{formatThemeName(theme)}</span>
 						</div>
-						{currTheme === t && <Check size={18} strokeWidth={3} />}
+						{/* The little only get rendered when this is the selected theme */}
+						{currTheme === theme && <Check size={18} strokeWidth={3} />}
 					</button>
 				</li>
 			))}

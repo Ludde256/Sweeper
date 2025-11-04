@@ -6,7 +6,7 @@ import { MapContainer, Marker, TileLayer, Tooltip } from "react-leaflet";
 
 import { Recenter } from "./recenter";
 import { FocusMarker, setFocusMarker } from "./focus";
-import { useIsDarkTheme } from "@/contexts/theme";
+import { useTheme } from "@/contexts/theme";
 
 export const DEFAULT_POS = [51.505, -0.09] as L.LatLngTuple; // London
 export const DEFAULT_ZOOM = 10;
@@ -21,9 +21,9 @@ type IpMarker = {
 
 export function Map() {
 	const { lookups } = useLookups();
-	const isDarkMode = useIsDarkTheme();
+	const { isDarkTheme } = useTheme();
 
-	const mapUrl = useMemo(() => (isDarkMode ? DARK_MAP_URL : LIGHT_MAP_URL), [isDarkMode]);
+	const mapUrl = useMemo(() => (isDarkTheme ? DARK_MAP_URL : LIGHT_MAP_URL), [isDarkTheme]);
 
 	const markers: IpMarker[] = useMemo(
 		() =>
