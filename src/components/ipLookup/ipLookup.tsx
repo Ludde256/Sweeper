@@ -12,13 +12,19 @@ export function IpLookup({ lookup }: IpLookupProps) {
 	return (
 		<div className="outline rounded-field w-full p-1">
 			<div className="flex flex-row justify-between w-md" style={{ width: "100%" }}>
-				<h3>Searched IP: {lookup.query}</h3>
-				<RemoveButton parentIp={lookup.query} />
-				<FocusMarker lat={lookup.lat} lng={lookup.lon} />
-				<div className="flex flex-row gap-16">
-					<ProxyBadge show={lookup.proxy} />
-					<HostingBadge show={lookup.hosting} />
-					<MobileBadge show={lookup.mobile} />
+				<div className="w-1/2">
+					<h3>Searched IP: {lookup.query}</h3>
+				</div>
+				<div className="w-1/4">
+					<RemoveButton parentIp={lookup.query} />
+					<FocusMarker lat={lookup.lat} lng={lookup.lon} />
+				</div>
+				<div className="w-1/4">
+					<div className="flex flex-row gap-16">
+						<ProxyBadge show={lookup.proxy} />
+						<HostingBadge show={lookup.hosting} />
+						<MobileBadge show={lookup.mobile} />
+					</div>
 				</div>
 			</div>
 			<div className="flex flex-row">

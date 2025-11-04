@@ -21,7 +21,7 @@ interface InfoBoxProps {
 
 export function GeoInfoBox({ lookup }: InfoBoxProps) {
 	return (
-		<div className="w-full flex flex-col outline m-1 rounded-field">
+		<div className="w-full flex text-xs md:text-lg flex-col m-1 rounded-field">
 			<TextRow title="Continent" text={`${lookup.continent} (${lookup.continentCode})`} />
 			<TextRow title="Country" text={`${lookup.country} (${lookup.countryCode})`} />
 			<TextRow title="Timezone" text={`${lookup.timezone} (${TimezoneFromOffset(lookup.offset)})`} />
@@ -34,7 +34,7 @@ export function GeoInfoBox({ lookup }: InfoBoxProps) {
 
 export function InternetInfoBox({ lookup }: InfoBoxProps) {
 	return (
-		<div className="w-full flex flex-col outline m-1 rounded-field">
+		<div className="w-full flex text-xs md:text-lg flex-col m-1 rounded-field">
 			<TextRow title="ISP" text={`${lookup.isp}`} />
 			<TextRow title="Organization" text={`${lookup.org}`} />
 			<TextRow title="AS" text={`${lookup.as}`} />
