@@ -62,6 +62,7 @@ export type Theme = (typeof themes)[number];
 interface ToastContextValue {
 	currTheme: Theme;
 	setTheme: (newTheme: Theme) => void;
+	setDefaultTheme: () => void;
 }
 
 const ThemeContext = createContext<ToastContextValue | undefined>(undefined);
@@ -84,7 +85,9 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
 	const setTheme = useCallback((newTheme: Theme) => setCurrTheme(newTheme), [setCurrTheme]);
 
-	const value = useMemo(() => ({ currTheme, setTheme }), [currTheme, setTheme]);
+	const setDefaultTheme = useCallback(() => setCurrTheme(defaultTheme), [defaultTheme, setCurrTheme]);
+
+	const value = useMemo(() => ({ currTheme, setTheme, setDefaultTheme }), [currTheme, setTheme, setDefaultTheme]);
 
 	return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
 }

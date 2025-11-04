@@ -1,6 +1,6 @@
 import { useTheme, themes, type Theme } from "@/contexts/theme";
 import { capitalize } from "@/utils";
-import { Check, ChevronDown } from "lucide-react";
+import { Check, ChevronDown, RotateCcw } from "lucide-react";
 
 export function ThemePreview({ theme }: { theme: string }) {
 	return (
@@ -26,7 +26,7 @@ function ThemeList({ currTheme, setTheme }: ThemeListProps) {
 		<ul tabIndex={0} className="flex flex-col pl-2 pb-2 w-64 h-[40vh] overflow-y-scroll">
 			{themes.map((t) => (
 				<li key={t} value={t}>
-					<button onClick={() => setTheme(t)} className="btn btn-ghost justify-between w-full flex items-center">
+					<button onClick={() => setTheme(t)} className="btn btn-ghost flex w-full justify-between items-center">
 						<div className="flex items-center gap-2">
 							<ThemePreview theme={t} />
 							<span className="font-mono">{capitalize(t)}</span>
@@ -40,18 +40,21 @@ function ThemeList({ currTheme, setTheme }: ThemeListProps) {
 }
 
 export function ThemePicker() {
-	const { currTheme, setTheme } = useTheme();
+	const { currTheme, setTheme, setDefaultTheme } = useTheme();
 
 	return (
 		<div className="dropdown dropdown-end">
-			<button className="btn btn-ghost font-mono" title="Theme Picker">
+			<button className="btn btn-ghost border border-base-300" title="Theme Picker">
 				<ThemePreview theme={currTheme} />
-				<span className="hidden sm:block">{capitalize(currTheme)}</span>
+				<span className="font-mono text-base-content/70 hidden sm:block">{capitalize(currTheme)}</span>
 				<ChevronDown size={16} />
 			</button>
 			<div className="dropdown-content bg-base-200 mt-4 border border-base-300 rounded-box shadow-lg">
-				<div className="w-full h-full px-4 pt-4">
+				<div className="w-full h-full flex items-center justify-between px-4 pt-4">
 					<span className="font-semibold text-sm">Theme Picker</span>
+					<button title="Reset Theme" onClick={setDefaultTheme} className="btn btn-sm btn-circle">
+						<RotateCcw size={18} />
+					</button>
 				</div>
 				<div className="divider m-2"></div>
 				<ThemeList currTheme={currTheme} setTheme={setTheme} />
