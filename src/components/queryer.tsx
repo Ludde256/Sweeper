@@ -28,7 +28,7 @@ export function Queryer() {
 				<p className="validator-hint">IP formatting wrong...</p>
 			</div>
 			<button className={`btn h-full btn-lg ${loading ? "btn-disabled" : "btn-primary"}`} onClick={handleQuery}>
-				{loading ? "Loading..." : "Lookup"}
+				{loading ? "Fetching..." : "Lookup"}
 			</button>
 		</div>
 	);
