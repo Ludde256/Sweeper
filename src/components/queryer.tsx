@@ -4,10 +4,13 @@ import { useLookups } from "@/hooks/useLookups";
 export function Queryer() {
 	const { addLookup } = useLookups();
 	const [ipInput, setIpInput] = useState("");
+	const [loading, setLoading] = useState(false);
 
 	const handleQuery = async () => {
+		setLoading(true);
 		await addLookup(ipInput);
 		setIpInput("");
+		setLoading(false);
 	};
 
 	return (
@@ -24,8 +27,8 @@ export function Queryer() {
 				</label>
 				<p className="validator-hint">IP formatting wrong...</p>
 			</div>
-			<button className="btn btn-primary h-full btn-lg" onClick={handleQuery}>
-				Query
+			<button className={`btn h-full btn-lg ${loading ? "btn-disabled" : "btn-primary"}`} onClick={handleQuery}>
+				{loading ? "Loading..." : "Lookup"}
 			</button>
 		</div>
 	);
