@@ -20,7 +20,7 @@ export function useLookups() {
 				}
 
 				const updatedSession = {
-					lookups: [...lookups, response],
+					lookups: [response, ...lookups],
 				};
 
 				updateSession(activeSession.id, updatedSession);
