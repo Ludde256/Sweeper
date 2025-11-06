@@ -11,15 +11,20 @@ export function Queryer() {
 	};
 
 	return (
-		<div className="flex w-full justify-center items-center box gap-2 h-32 px-6">
-			<input
-				type="text"
-				placeholder="Lookup on IP or URL"
-				value={ipInput}
-				onChange={(e) => setIpInput(e.target.value)}
-				className="input input-lg w-full"
-			/>
-			<button className="btn btn-primary btn-lg" onClick={handleQuery}>
+		<div className="flex w-full py-4 px-6 justify-center items-center box gap-2 h-32">
+			<div className="flex w-full items-start justify-center flex-col gap-2">
+				<label className="input input-lg validator w-full">
+					<input
+						type="text"
+						pattern="^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
+						placeholder="Lookup on IP"
+						value={ipInput}
+						onChange={(e) => setIpInput(e.target.value)}
+					/>
+				</label>
+				<p className="validator-hint">IP formatting wrong...</p>
+			</div>
+			<button className="btn btn-primary h-full btn-lg" onClick={handleQuery}>
 				Query
 			</button>
 		</div>
